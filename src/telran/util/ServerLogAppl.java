@@ -9,7 +9,11 @@ import java.util.Scanner;
 
 public class ServerLogAppl {
 	private static final int PORT = 4001;
-
+	static	int traceCount = 0;
+	static		int warnCount = 0;
+	static		int infoCount = 0;
+	static		int debugCount = 0;
+	static		int errorCount = 0;
 	public static void main(String[] args) throws Exception {
 		ServerSocket serverSocket = new ServerSocket(PORT);
 		System.out.println("server listening on port " + PORT);
@@ -40,18 +44,14 @@ public class ServerLogAppl {
 	private static String getResponse(String request) {
 		String[] tokens = request.split("#");
 	//	HashMap<String, Integer> levelCounter = new HashMap();
-		int traceCount = 0;
-		int warnCount = 0;
-		int infoCount = 0;
-		int debugCount = 0;
-		int errorCount = 0;
+
 		if (tokens.length != 2) {
 			return "Wrong Request";
 
 		} else if (tokens[0].equals("log")) {
 			if (tokens[1].contains("TRACE")) {
 				traceCount++;
-			}
+						}
 			if (tokens[1].contains("WARN")) {
 				warnCount++;
 			}
@@ -68,6 +68,7 @@ public class ServerLogAppl {
 			return "OK";
 		} else if (tokens[0].equals("counter")) {
 			if (tokens[1].equals("error")) {
+				
 				return Integer.toString(errorCount);
 			}
 			if (tokens[1].equals("warn")) {
@@ -80,6 +81,7 @@ public class ServerLogAppl {
 				return Integer.toString(debugCount);
 			}
 			if (tokens[1].equals("trace")) {
+				
 				return Integer.toString(traceCount);
 			} else {
 				return "Wrong type " + tokens[0];

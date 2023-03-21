@@ -9,7 +9,8 @@ public class LogTest {
 	@Test
 	void consoleTest() {
 		SimpleStreamHalder handler = new SimpleStreamHalder (new PrintStream(System.out));
-		Logger logger = new Logger (handler, "loger",Level.INFO);
+		Logger logger = new Logger (handler, "loger");
+		logger.setLevel(Level.TRACE);
 		logger.trace("level TRACE message is:");
 		logger.debug("level DEBUG message is:");
 		logger.info("level INFO message is:");
