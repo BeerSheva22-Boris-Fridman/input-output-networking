@@ -37,7 +37,7 @@ Employee[] employees = {empl1, empl2, empl3, empl4};
 Company company;
 	@BeforeEach
 	void setUp() throws Exception {
-		company = new CompanyImpl();
+		
 		for(Employee empl: employees) {
 			company.addEmployee(empl);
 		}
