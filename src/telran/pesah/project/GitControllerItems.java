@@ -24,19 +24,20 @@ public class GitControllerItems {
 
 	public static Item[] getItems(GitRepositoryImpl gitRepository) {
 		GitRepository = gitRepository;
-		Item[] items = new Item[7];
+		Item[] items = new Item[12];
 		items[0] = fileState();
 		items[1] = commit();
 		items[2] = log();
 		items[3] = commitContent();
 		items[4] = getHead();
 		items[5] = createBranch();
-		items[6] = close();
-//	items[7] = ;
-//	items[8] = ;
-//	items[9] = ;
-//	items[10] = ;
-//	items[11] = close;
+		items[6] = deliteBranch();
+		items[7] = renameBranch();
+		items[8] = branches();
+		items[9] = switchTo();
+		items[10] = addIgnoredFileNameExp();	
+		items[11] = close();
+
 
 		return items;
 	}
@@ -118,4 +119,55 @@ public class GitControllerItems {
 		return Item.of("Create new branch", createBranch);
 	}
 
+	public static Item switchTo() {
+		Consumer<InputOutput> switchTo = x -> {
+			String name = io.readString("Enter commit or branch name to switch to");
+			String res	= GitRepository.switchTo(name);
+			io.writeLine(res);
+			};
+		return Item.of("Switch to", switchTo);
+	}
+
+	public static Item branches() {
+		Consumer<InputOutput> branches = x -> {
+			List<String> list = GitRepository.branches();
+			if (list.isEmpty()) {
+				io.writeLine("no branches yet");
+			} else {
+				//list.stream().forEach(i -> io.writeLine(i));	
+				for(String branchName: list) {
+					io.writeLine(branchName + "\n");	
+				}
+			}	
+		};
+		return Item.of("Branches", branches);
+	}
+	
+	public static Item addIgnoredFileNameExp() {
+		Consumer<InputOutput> addIgnoredFileNameExp = x -> {
+			String regex = io.readString("Enter file name to add it to ignore list:");
+			io.writeLine(GitRepository.addIgnoredFileNameExp(regex));	
+		};
+		return Item.of("Ignore file", addIgnoredFileNameExp);
+	}	
+	
+	public static Item deliteBranch() {
+		Consumer<InputOutput> deliteBranch = x -> {
+			String branchName = io.readString("Enter a name of a branch to delite"); 
+			String res = GitRepository.deleteBranch(branchName);
+			io.writeLine(res);
+		};
+		return Item.of("Delite a branch", deliteBranch);
+	}
+	
+	public static Item renameBranch() {
+		Consumer<InputOutput> renameBranch = x -> {
+			String branchName = io.readString("Enter branch name"); 
+			String newBranchName = io.readString("Enter new name");
+			String res = GitRepository.renameBranch(branchName, newBranchName);
+			io.writeLine(res);
+		};
+		return Item.of("Rename branch", renameBranch);
+	}
+	
 }
