@@ -30,6 +30,13 @@ public class CompanyImpl implements Company {
 		
 		return res;
 	}
+	public boolean checkEmployee (long id) {
+		boolean res = false;
+		if(employees.containsKey(id)) {
+			return true;
+		}else {
+		return res;}
+		}
 
 	private <T> void addIndexMap(Map<T, Set<Employee>> map, T key, Employee empl) {
 		map.computeIfAbsent(key, k->new HashSet<>()).add(empl);

@@ -1,6 +1,7 @@
 package telran.employees.net;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import telran.employees.Company;
@@ -31,6 +32,16 @@ public class CompanyProtocol implements Protocol {
 			return new Response(ResponseCode.WRONG_DATA, e.toString());
 		}
 	}
+//		 try {
+//		        Method method = CompanyProtocol.class.getDeclaredMethod(request.type, Serializable.class);
+//		        Serializable result = (Serializable) method.invoke(this, request.data);
+//		        return new Response(ResponseCode.OK, result);
+//		    } catch (NoSuchMethodException e) {
+//		        return new Response(ResponseCode.WRONG_REQUEST, request.type + " Request type not found");
+//		    } catch (Throwable e) {
+//		        return new Response(ResponseCode.WRONG_DATA, e.toString());
+//		    }
+//		} 
 	private Response getResponseData(Serializable data) {
 		
 		return new Response(ResponseCode.OK, data);
