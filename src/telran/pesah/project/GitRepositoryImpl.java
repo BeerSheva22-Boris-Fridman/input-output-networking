@@ -16,7 +16,7 @@ import java.util.regex.PatternSyntaxException;
 public class GitRepositoryImpl implements GitRepository {
 
 	private static final long serialVersionUID = 1L;
-	private static final String IGNORE_REGEX = "(^\\..*)|(^.*\\.data)";
+	private static final String IGNORE_REGEX = "(^\\..*)|(^.*\\.jar)";
 	private String head;
 	private String currentCommitName;
 	private String currentBranchName;

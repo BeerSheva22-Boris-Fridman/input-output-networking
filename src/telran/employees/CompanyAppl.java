@@ -22,7 +22,7 @@ public class CompanyAppl {
 	static Item close = Item.close();
 	static InputOutput io = new StandardInputOutput();
 	static	Set <String> departments = new HashSet<String>();
-
+ 
 	public static void main(String[] args) {
 		departments.add("department1");
 		departments.add("department2");
